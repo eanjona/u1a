@@ -12,26 +12,30 @@ let nrOfRolls = 0;      // Antal omkast som återstår
 // --------------------------------------------------
 // Ta fram referenser till element i gränssnittet och lägg till händelselyssnare.
 function init() {
-    optionsBtn.addEventListener("click", cbOptionsOnClick);
-    newBtn.addEventListener("click", cbNewOnClick);
+    optionsBtn.addEventListener("click", cbOptions);
+    newBtn.addEventListener("click", cbNewGame);
+
+    // Initial settings
+    document.getElementById("rollCounter").textContent = maxNrOfRolls;
 	
-} // Slut init
+} // End init
 window.addEventListener("load", init);
 // --------------------------------------------------
 
-function cbOptionsOnClick() {
-    console.log("cbOptionsOnClick() called");
+function cbOptions() {
+    console.log("cbOptions() called");
     optionsDialog = document.getElementById("options");
-    optionsDialog.showModal().addEventListener("click", cbOptionsOkBtn);
+    
+    optionsDialog.showModal();
+    document.getElementById("optionsOkBtn").addEventListener("click", cbOptionsOk);
 }
 
-function cbNewOnClick() {
-    console.log("cbNewOnClick() called");
+function cbNewGame() {
+    console.log("cbNewGame() called");
 }
 
-function cbOptionsOkBtn() {
-    console.log("cbOptionsOkBtn() called was:" + maxNrOfRolls);
+function cbOptionsOk() {
     maxNrOfRolls = document.getElementById("nrOfReroll").value;
-    console.log("cbOptionsOkBtn() called now:" + maxNrOfRolls);
-
+    document.getElementById("rollCounter").textContent = maxNrOfRolls;
+    optionsDialog.close();
 }
